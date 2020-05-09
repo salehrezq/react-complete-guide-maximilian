@@ -6,10 +6,10 @@ function App() {
   return (
     <div className="App">
       <h1>Hi I am a react app</h1>
-        <Person />
-        <Person />
-        <Person />
-        <Person />
+        <Person name="Saleh" age="32"/>
+        <Person name="Mol" age="30">
+            Child content8
+        </Person>
 
     </div>
   );
