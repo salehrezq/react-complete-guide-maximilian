@@ -1,8 +1,9 @@
 import React from 'react';
+import './Person.css';
 
 const person = (props) => {
     return (
-        <div>
+        <div className="Person">
             <p onClick={props.click} >I'm a {props.name} and I am {props.age} years old</p>
             <p>{props.children}</p>
             {/* You will receive a Warning because you provided a `value` prop to a form
