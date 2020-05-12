@@ -22,6 +22,16 @@ class App extends Component{
        });
     }
 
+    nameChangeHandler = (event) => {
+        this.setState({
+            persons: [
+                {name: 'Saleh', age: 33},
+                {name: 'Ramy', age: 28},
+                {name: event.target.value, age: 10}
+            ]
+        });
+    }
+
     render() {
         return (
             <div className="App">
@@ -31,9 +41,9 @@ class App extends Component{
                     arrow function approach is not the recommended approach */}
                 <button onClick={(event) => this.switchNameHandler("Saleh Rezq")}>Switch</button>
                 <Person name={this.state.persons[0].name} age={this.state.persons[0].age}/>
-                {/* click passed to <Person> is a word chosen by you and can be anything */}
+                {/* `click` and `changed` passed to <Person> are words chosen by you and can be anything */}
                 <Person click={this.switchNameHandler.bind(this, "Saleh!!!!")} name={this.state.persons[1].name} age={this.state.persons[1].age}/>
-                <Person click={(event) => this.switchNameHandler("Saleh REZQ")} name={this.state.persons[2].name} age={this.state.persons[2].age}>
+                <Person changed={this.nameChangeHandler} name={this.state.persons[2].name} age={this.state.persons[2].age}>
                 Child content
                 </Person>
             </div>
