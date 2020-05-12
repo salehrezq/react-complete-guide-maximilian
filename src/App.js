@@ -12,10 +12,10 @@ class App extends Component{
         ]
     }
 
-    switchNameHandler = () => {
+    switchNameHandler = (newName) => {
        this.setState({
            persons: [
-               {name: 'Saleh Rezq', age: 33},
+               {name: newName, age: 33},
                {name: 'Ramy', age: 28},
                {name: 'Shrod', age: 10}
            ]
@@ -26,10 +26,14 @@ class App extends Component{
         return (
             <div className="App">
                 <h1>Hi I am a React app</h1>
-                <button onClick={this.switchNameHandler}>Switch</button>
+                {/* Using arrow function approach - versus bind() - can cause react
+                    to re-render certain things in your app too often; causes performance issues.
+                    arrow function approach is not the recommended approach */}
+                <button onClick={(event) => this.switchNameHandler("Saleh Rezq")}>Switch</button>
                 <Person name={this.state.persons[0].name} age={this.state.persons[0].age}/>
-                <Person name={this.state.persons[1].name} age={this.state.persons[1].age}/>
-                <Person name={this.state.persons[2].name} age={this.state.persons[2].age}>
+                {/* click passed to <Person> is a word chosen by you and can be anything */}
+                <Person click={this.switchNameHandler.bind(this, "Saleh!!!!")} name={this.state.persons[1].name} age={this.state.persons[1].age}/>
+                <Person click={(event) => this.switchNameHandler("Saleh REZQ")} name={this.state.persons[2].name} age={this.state.persons[2].age}>
                 Child content
                 </Person>
             </div>
