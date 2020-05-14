@@ -49,6 +49,27 @@ class App extends Component{
             cursor: 'pointer'
         };
 
+        let persons = null;
+
+        if(this.state.showPersons){
+            persons = (
+                <div>
+                    <Person name={this.state.persons[0].name}
+                            age={this.state.persons[0].age}/>
+                    {/* `click` and `changed` passed to <Person> are words chosen by you and can be anything */}
+                    <Person click={this.switchNameHandler.bind(this, "Saleh!!!!")}
+                            name={this.state.persons[1].name}
+                            age={this.state.persons[1].age}/>
+                    <Person
+                        changed={this.nameChangeHandler}
+                        name={this.state.persons[2].name}
+                        age={this.state.persons[2].age}>
+                        Child content
+                    </Person>
+                </div>
+            );
+        }
+
         return (
             <div className="App">
                 <h1>Hi I am a React app</h1>
@@ -58,23 +79,8 @@ class App extends Component{
                 <button
                     style={style}
                     onClick={this.togglePersonsHandler}>{this.state.showPersons? "Hide": "Show"}</button>
+                    {persons}
 
-                { this.state.showPersons?
-                    <div>
-                        <Person name={this.state.persons[0].name}
-                                age={this.state.persons[0].age}/>
-                        {/* `click` and `changed` passed to <Person> are words chosen by you and can be anything */}
-                        <Person click={this.switchNameHandler.bind(this, "Saleh!!!!")}
-                                name={this.state.persons[1].name}
-                                age={this.state.persons[1].age}/>
-                        <Person
-                            changed={this.nameChangeHandler}
-                            name={this.state.persons[2].name}
-                            age={this.state.persons[2].age}>
-                        Child content
-                        </Person>
-                    </div> : null
-                }
 
             </div>
         );
