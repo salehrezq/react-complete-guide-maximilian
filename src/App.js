@@ -13,16 +13,6 @@ class App extends Component{
         showPersons: false
     }
 
-    switchNameHandler = (newName) => {
-       this.setState({
-           persons: [
-               {name: newName, age: 33},
-               {name: 'Ramy', age: 28},
-               {name: 'Shrod', age: 10}
-           ]
-       });
-    }
-
     nameChangeHandler = (event) => {
         this.setState({
             persons: [
@@ -32,6 +22,16 @@ class App extends Component{
             ]
         });
     }
+
+    deletePersonHandler = personIndex => {
+        const persons = this.state.persons;
+        // Since `persons` is a reference to the persons in the state of React
+        // applying the `splice()` method; directly manipulates the state of React
+        // which is a very bad practice to do; without using `setState()`
+        persons.splice(personIndex, 1);
+        this.setState({persons: persons});
+    }
+
 
     togglePersonsHandler = () => {
         this.setState({
@@ -54,9 +54,10 @@ class App extends Component{
         if(this.state.showPersons){
             persons = (
                 <div>
-                    {this.state.persons.map(person => {
+                    {this.state.persons.map((person, index) => {
                         return  <Person name={person.name}
-                                        age={person.age}/>
+                                        age={person.age}
+                                        click={() => this.deletePersonHandler(index)}/>
                     })}
                 </div>
             );
