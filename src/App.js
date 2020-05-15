@@ -1,26 +1,25 @@
-import React from 'react';
+import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component{
+
+  state = {
+    content: "",
+  }
+
+    updatedInput = (event) => {
+      this.setState({content: event.target.value});
+  }
+
+  render() {
+    return (
+      <div className="App">
+          <input type="text" onChange={event => this.updatedInput(event)} value={this.state.content}/>
+          <p>{this.state.content.length}</p>
+      </div>
+    )
+  }
 }
 
 export default App;
