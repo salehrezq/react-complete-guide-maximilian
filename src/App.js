@@ -24,11 +24,15 @@ class App extends Component{
     }
 
     deletePersonHandler = personIndex => {
-        const persons = this.state.persons;
-        // Since `persons` is a reference to the persons in the state of React
-        // applying the `splice()` method; directly manipulates the state of React
-        // which is a very bad practice to do; without using `setState()`
+        // Copy this.state.persons using `splice()`
+        // const persons = this.state.persons.splice();
+        // Or Copy this.state.persons using the spread operator
+        const persons = [...this.state.persons];
+        // Now since `persons` is a copy but not a reference to the persons in the state of React.
+        // Now applying the `splice()` method manipulates the copy but not the state of React
+        // which is a highly recommended practice
         persons.splice(personIndex, 1);
+        // Now update the state using `this.setState()` with a new data array.
         this.setState({persons: persons});
     }
 
