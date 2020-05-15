@@ -6,9 +6,10 @@ class App extends Component{
 
     state = {
         persons: [
-            {name: 'Saleh', age: 33},
-            {name: 'Ramy', age: 28},
-            {name: 'Shrod', age: 25}
+            // id here is dummy data, you are supposed to get unique ids from the database
+            {id: 'p101', name: 'Saleh', age: 33},
+            {id: 'p102', name: 'Ramy', age: 28},
+            {id: 'p103', name: 'Shrod', age: 25}
         ],
         showPersons: false
     }
@@ -61,7 +62,8 @@ class App extends Component{
                     {this.state.persons.map((person, index) => {
                         return  <Person name={person.name}
                                         age={person.age}
-                                        click={() => this.deletePersonHandler(index)}/>
+                                        click={() => this.deletePersonHandler(index)}
+                                        key={person.id}/>
                     })}
                 </div>
             );
