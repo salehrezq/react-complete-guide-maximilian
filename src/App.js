@@ -13,6 +13,12 @@ class App extends Component{
       this.setState({content: event.target.value});
     }
 
+    removeChar = (index) => {
+        let str = this.state.content;
+        str = str.slice(0, index) + str.slice(index+1);
+        this.setState({content: str});
+    }
+
   render() {
 
       let charComponents = null;
@@ -21,6 +27,7 @@ class App extends Component{
                   [...this.state.content].map((charItem, index)=> {
                       return  <CharComponent charOfText={charItem}
                                              key={index}
+                                             removeChar={() => this.removeChar(index)}
                       />
                   })
           );

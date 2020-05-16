@@ -12,7 +12,10 @@ const charComponent = props => {
 
     return (
         <div className="App">
-            <p style={style}>{props.charOfText}</p>
+            <p style={style}
+               onClick={props.removeChar}>
+                {props.charOfText}
+                </p>
         </div>
     );
 }
