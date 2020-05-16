@@ -11,15 +11,26 @@ class App extends Component{
 
     updatedInput = (event) => {
       this.setState({content: event.target.value});
-  }
+    }
 
   render() {
+
+      let charComponents = null;
+
+      charComponents = (
+                  [...this.state.content].map((charItem, index)=> {
+                      return  <CharComponent charOfText={charItem}
+                                             key={index}
+                      />
+                  })
+          );
+
     return (
       <div className="App">
           <input type="text" onChange={event => this.updatedInput(event)} value={this.state.content}/>
           <p>{this.state.content.length}</p>
           <ValidationComponent textLength={this.state.content.length}/>
-          <CharComponent/>
+          {charComponents}
       </div>
     )
   }

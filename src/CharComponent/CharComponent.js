@@ -12,7 +12,7 @@ const charComponent = props => {
 
     return (
         <div className="App">
-            <p style={style}>Hi</p>
+            <p style={style}>{props.charOfText}</p>
         </div>
     );
 }
