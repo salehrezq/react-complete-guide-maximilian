@@ -6,37 +6,37 @@ import CharComponent from './CharComponent/CharComponent';
 class App extends Component{
 
   state = {
-    content: "",
+    userInput: "",
   }
 
-    updatedInput = (event) => {
-      this.setState({content: event.target.value});
+    inputChangeHandler = (event) => {
+      this.setState({userInput: event.target.value});
     }
 
-    removeChar = (index) => {
-        let str = this.state.content;
-        str = str.slice(0, index) + str.slice(index+1);
-        this.setState({content: str});
+    removeCharHandler = (index) => {
+        const currentInput = this.state.userInput;
+        const changedInput = currentInput.slice(0, index) + currentInput.slice(index+1);
+        this.setState({userInput: changedInput});
     }
 
   render() {
 
-      let charComponents = null;
-
-      charComponents = (
-                  [...this.state.content].map((charItem, index)=> {
-                      return  <CharComponent charOfText={charItem}
-                                             key={index}
-                                             removeChar={() => this.removeChar(index)}
-                      />
-                  })
-          );
+      const charComponents = [...this.state.userInput].map((charItem, index)=> {
+          return  <CharComponent charOfText={charItem}
+                                 key={index}
+                                 removeOnClick={() => this.removeCharHandler(index)}
+          />
+      });
 
     return (
       <div className="App">
-          <input type="text" onChange={event => this.updatedInput(event)} value={this.state.content}/>
-          <p>{this.state.content.length}</p>
-          <ValidationComponent textLength={this.state.content.length}/>
+          <input type="text"
+                 // event argument is passed implicitly to `this.inputChangeHandler`
+                 // Or you can write it like this {(event) => this.inputChangeHandler(event)}
+                 onChange={this.inputChangeHandler}
+                 value={this.state.userInput}/>
+          <p>{this.state.userInput.length}</p>
+          <ValidationComponent textLength={this.state.userInput.length}/>
           {charComponents}
       </div>
     )

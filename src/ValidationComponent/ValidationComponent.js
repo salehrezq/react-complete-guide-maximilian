@@ -4,11 +4,7 @@ const validationComponent = props => {
 
     const validateLengthMessage = textLength => textLength < 5? "Text too short" : "Text long enough";
 
-    return (
-      <div className="App">
-        <p>{validateLengthMessage(props.textLength)}</p>
-      </div>
-    );
+    return <div><p>{validateLengthMessage(props.textLength)}</p></div>;
 }
 
 export default validationComponent;
