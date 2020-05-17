@@ -55,15 +55,24 @@ class App extends Component{
         });
     }
 
-    render() {
-
+    styleShowHideButton = () => {
         const style = {
-            backgroundColor: 'white',
+            backgroundColor: 'green',
+            color: 'white',
             font: 'inherit',
             border: '1px solid blue',
             padding: '8px',
             cursor: 'pointer'
         };
+
+        if(this.state.showPersons){
+            style.backgroundColor = 'red';
+        }
+
+        return style;
+    }
+
+    render() {
 
         let persons = null;
 
@@ -88,7 +97,7 @@ class App extends Component{
                     to re-render certain things in your app too often; causes performance issues.
                     arrow function approach is not the recommended approach */}
                 <button
-                    style={style}
+                    style={this.styleShowHideButton()}
                     onClick={this.togglePersonsHandler}>{this.state.showPersons? "Hide": "Show"}</button>
                     {persons}
 
