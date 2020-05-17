@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import Person from './Person/Person';
-import Radium from 'radium';
+import Radium, {StyleRoot} from 'radium';
 
 class App extends Component{
 
@@ -115,19 +115,19 @@ class App extends Component{
         }
 
         return (
-            <div className="App">
-                <h1>Hi I am a React app</h1>
-                <p className={this.getClassToParagraph()}>This is really working!</p>
-                {/* Using arrow function approach - versus bind() - can cause react
-                    to re-render certain things in your app too often; causes performance issues.
-                    arrow function approach is not the recommended approach */}
-                <button
-                    style={this.styleShowHideButton()}
-                    onClick={this.togglePersonsHandler}>{this.state.showPersons? "Hide": "Show"}</button>
-                    {persons}
-
-
-            </div>
+            <StyleRoot>
+                <div className="App">
+                    <h1>Hi I am a React app</h1>
+                    <p className={this.getClassToParagraph()}>This is really working!</p>
+                    {/* Using arrow function approach - versus bind() - can cause react
+                        to re-render certain things in your app too often; causes performance issues.
+                        arrow function approach is not the recommended approach */}
+                    <button
+                        style={this.styleShowHideButton()}
+                        onClick={this.togglePersonsHandler}>{this.state.showPersons? "Hide": "Show"}</button>
+                        {persons}
+                </div>
+            </StyleRoot>
         );
     }
 }
