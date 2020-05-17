@@ -72,6 +72,21 @@ class App extends Component{
         return style;
     }
 
+    getClassToParagraph = () => {
+
+        let classNames = [];
+
+        if(this.state.persons.length <= 2){
+            classNames.push('red');
+        }
+
+        if(this.state.persons.length <= 1){
+            classNames.push('bold');
+        }
+
+        return classNames.join(' ');
+    }
+
     render() {
 
         let persons = null;
@@ -93,6 +108,7 @@ class App extends Component{
         return (
             <div className="App">
                 <h1>Hi I am a React app</h1>
+                <p className={this.getClassToParagraph()}>This is really working!</p>
                 {/* Using arrow function approach - versus bind() - can cause react
                     to re-render certain things in your app too often; causes performance issues.
                     arrow function approach is not the recommended approach */}
