@@ -4,7 +4,7 @@ import Person from './Person/Person';
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
-    background-color: green;
+    background-color: ${props => props.arePersonsShown? 'red' : 'green'};
     color: white;
     font: inherit;
     border: 1px solid blue;
@@ -18,7 +18,7 @@ const StyledButton = styled.button`
      * https://stackoverflow.com/a/55939968/6811102
      *********************************************************/
     &:hover {
-        background-color: lightgreen;
+        background-color: ${props => props.arePersonsShown? 'salmon' : 'lightgreen'};
         color: black;
     }
 `;
@@ -142,7 +142,10 @@ class App extends Component{
                         to re-render certain things in your app too often; causes performance issues.
                         arrow function approach is not the recommended approach */}
                     <StyledButton
-                        onClick={this.togglePersonsHandler}>{this.state.showPersons? "Hide": "Show"}
+                        onClick={this.togglePersonsHandler}
+                        // `arePersonsShown` is of your choice and can be any word
+                        arePersonsShown={this.state.showPersons}>
+                        {this.state.showPersons? "Hide": "Show"}
                     </StyledButton>
                         {persons}
                 </div>
