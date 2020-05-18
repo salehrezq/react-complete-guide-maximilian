@@ -1,6 +1,27 @@
 import React, {Component} from 'react';
 import './App.css';
 import Person from './Person/Person';
+import styled from 'styled-components';
+
+const StyledButton = styled.button`
+    background-color: green;
+    color: white;
+    font: inherit;
+    border: 1px solid blue;
+    padding: 8px;
+    cursor: pointer;
+
+    /**********************************************************
+     * You add & ampersand to the pseudo class.
+     * & is kinda like saying "And add this to the current classes"
+     * The current classes added by the styled component package.
+     * https://stackoverflow.com/a/55939968/6811102
+     *********************************************************/
+    &:hover {
+        background-color: lightgreen;
+        color: black;
+    }
+`;
 
 class App extends Component{
 
@@ -120,9 +141,9 @@ class App extends Component{
                     {/* Using arrow function approach - versus bind() - can cause react
                         to re-render certain things in your app too often; causes performance issues.
                         arrow function approach is not the recommended approach */}
-                    <button
-                        style={this.styleShowHideButton()}
-                        onClick={this.togglePersonsHandler}>{this.state.showPersons? "Hide": "Show"}</button>
+                    <StyledButton
+                        onClick={this.togglePersonsHandler}>{this.state.showPersons? "Hide": "Show"}
+                    </StyledButton>
                         {persons}
                 </div>
         );
