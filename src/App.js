@@ -1,27 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import Person from './Person/Person';
-import styled from 'styled-components';
-
-const StyledButton = styled.button`
-    background-color: ${props => props.arePersonsShown? 'red' : 'green'};
-    color: white;
-    font: inherit;
-    border: 1px solid blue;
-    padding: 8px;
-    cursor: pointer;
-
-    /**********************************************************
-     * You add & ampersand to the pseudo class.
-     * & is kinda like saying "And add this to the current classes"
-     * The current classes added by the styled component package.
-     * https://stackoverflow.com/a/55939968/6811102
-     *********************************************************/
-    &:hover {
-        background-color: ${props => props.arePersonsShown? 'salmon' : 'lightgreen'};
-        color: black;
-    }
-`;
+import appStyles from './AppStyles.module.css';
 
 class App extends Component{
 
@@ -77,28 +57,13 @@ class App extends Component{
     }
 
     styleShowHideButton = () => {
-        const style = {
-            backgroundColor: 'green',
-            color: 'white',
-            font: 'inherit',
-            border: '1px solid blue',
-            padding: '8px',
-            cursor: 'pointer',
-            ':hover': {
-                backgroundColor: 'lightgreen',
-                color: 'black'
-            }
-        };
+        let classNames = [appStyles.button];
 
         if(this.state.showPersons){
-            style.backgroundColor = 'red';
-            style[':hover'] = {
-                backgroundColor: 'salmon',
-                color: 'black'
-            }
+            classNames.push(appStyles.red);
         }
 
-        return style;
+        return classNames.join(' ');
     }
 
     getClassToParagraph = () => {
@@ -141,12 +106,11 @@ class App extends Component{
                     {/* Using arrow function approach - versus bind() - can cause react
                         to re-render certain things in your app too often; causes performance issues.
                         arrow function approach is not the recommended approach */}
-                    <StyledButton
+                    <button
                         onClick={this.togglePersonsHandler}
-                        // `arePersonsShown` is of your choice and can be any word
-                        arePersonsShown={this.state.showPersons}>
+                        className={this.styleShowHideButton()}>
                         {this.state.showPersons? "Hide": "Show"}
-                    </StyledButton>
+                    </button>
                         {persons}
                 </div>
         );
