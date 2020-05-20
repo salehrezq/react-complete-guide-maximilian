@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import Person from './Person/Person';
 import appStyles from './AppStyles.module.css';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 class App extends Component{
 
@@ -89,11 +90,14 @@ class App extends Component{
             persons = (
                 <div>
                     {this.state.persons.map((person, index) => {
-                        return  <Person name={person.name}
+                        // The `key` prop has been moved from <person> to the outer wrapping component which is
+                        // ErrorBoundary; because it is a requirement to have the key on the outer element.
+                        return  <ErrorBoundary key={person.id}>
+                                        <Person name={person.name}
                                         age={person.age}
                                         click={() => this.deletePersonHandler(index)}
-                                        key={person.id}
                                         changed={event => this.nameChangeHandler(event, person.id)}/>
+                        </ErrorBoundary>
                     })}
                 </div>
             );

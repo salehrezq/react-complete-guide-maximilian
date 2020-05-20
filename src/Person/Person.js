@@ -6,6 +6,12 @@ import personStyles from './Person.module.css';
 
 const person = (props) => {
 
+    // Constructing an error
+    const rand = Math.random();
+    if(rand > 0.7) {
+       throw new Error('Something went wrong');
+    }
+
     return (
         <div className={personStyles.Person}>
             <p onClick={props.click} >I'm a {props.name} and I am {props.age} years old</p>
