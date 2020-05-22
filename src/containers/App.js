@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import './App.css';
 import Person from '../components/Persons/Person/Person';
 import appStyles from './AppStyles.module.css';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component{
 
@@ -49,36 +51,10 @@ class App extends Component{
         this.setState({persons: persons});
     }
 
-
     togglePersonsHandler = () => {
         this.setState({
             showPersons: !this.state.showPersons
         });
-    }
-
-    styleShowHideButton = () => {
-        let classNames = [appStyles.button];
-
-        if(this.state.showPersons){
-            classNames.push(appStyles.red);
-        }
-
-        return classNames.join(' ');
-    }
-
-    getClassToParagraph = () => {
-
-        let classNames = [];
-
-        if(this.state.persons.length <= 2){
-            classNames.push('red');
-        }
-
-        if(this.state.persons.length <= 1){
-            classNames.push('bold');
-        }
-
-        return classNames.join(' ');
     }
 
     render() {
@@ -86,32 +62,19 @@ class App extends Component{
         let persons = null;
 
         if(this.state.showPersons){
-            persons = (
-                <div>
-                    {this.state.persons.map((person, index) => {
-                        return  <Person name={person.name}
-                                        age={person.age}
-                                        click={() => this.deletePersonHandler(index)}
-                                        key={person.id}
-                                        changed={event => this.nameChangeHandler(event, person.id)}/>
-                    })}
-                </div>
-            );
+            persons = <Persons persons={this.state.persons}
+                               deleteOnClick={this.deletePersonHandler}
+                               nameChanged={this.nameChangeHandler}
+            />
         }
 
         return (
                 <div className="App">
-                    <h1>Hi I am a React app</h1>
-                    <p className={this.getClassToParagraph()}>This is really working!</p>
-                    {/* Using arrow function approach - versus bind() - can cause react
-                        to re-render certain things in your app too often; causes performance issues.
-                        arrow function approach is not the recommended approach */}
-                    <button
-                        onClick={this.togglePersonsHandler}
-                        className={this.styleShowHideButton()}>
-                        {this.state.showPersons? "Hide": "Show"}
-                    </button>
-                        {persons}
+                    <Cockpit
+                        persons={this.state.persons}
+                        showPersons={this.state.showPersons}
+                        togglePersonsHandler={this.togglePersonsHandler}/>
+                    {persons}
                 </div>
         );
     }
