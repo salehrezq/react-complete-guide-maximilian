@@ -19,7 +19,7 @@ const cockpit = props => {
 
     return (
       <div className={classes.Cockpit}>
-          <h1>Hi I am a React app</h1>
+          <h1>{props.title}</h1>
           <p className={classNames.join(' ')}>This is really working!</p>
           {/* Using arrow function approach - versus bind() - can cause react
                         to re-render certain things in your app too often; causes performance issues.
