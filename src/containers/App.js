@@ -7,6 +7,40 @@ import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component{
 
+    constructor(props) {
+
+        super(props);
+        console.log('[App.js] constructor');
+
+        // If you want; you can define the `state` inside the constructor this way.
+        // By the way; the definition of the `state` outside the `constructor()`
+        // does actually happen behind the scenes inside the `constructor()`
+        // this.state = {};
+    }
+
+    static getDerivedStateFromProps(props, state) {
+
+        console.log('[App.js] getDerivedStateFromProps', props);
+        return state;
+    }
+
+    /*
+    * Warning: Unsafe legacy lifecycles will not be called for components using new component APIs.
+    * App uses getDerivedStateFromProps() but also contains the following legacy lifecycles:
+    * componentWillMount
+    * The above lifecycles should be removed. Learn more about this warning here:
+    * https://fb.me/react-unsafe-component-lifecycles
+    **/
+    // componentWillMount() {
+    //     console.log('[App.js] componentWillMount');
+    // }
+
+    componentDidMount() {
+        console.log('[App.js] componentDidMount');
+    }
+
+
+
     state = {
         persons: [
             // id here is dummy data, you are supposed to get unique ids from the database
@@ -58,6 +92,8 @@ class App extends Component{
     }
 
     render() {
+
+        console.log('[App.js] render');
 
         let persons = null;
 
