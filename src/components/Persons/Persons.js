@@ -3,6 +3,32 @@ import Person from './Person/Person';
 
 class Persons extends Component {
 
+
+    static getDerivedStateFromProps(props, state) {
+
+        console.log('[Persons.js] getDerivedStateFromProps', props);
+        return state;
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+
+        console.log('[Persons.js - update] shouldComponentUpdate');
+        // compare this.props with nextProps and return boolean based on it.
+        return true;
+    }
+
+    getSnapshotBeforeUpdate(prevProps, prevState) {
+
+        console.log('[Persons.js - update] getSnapshotBeforeUpdate');
+        return {snapshotData: 'This snapshot will be accessible in componentDidUpdate() through the third argument'};
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+
+        console.log('[Persons.js - update] componentDidUpdate');
+        console.log(snapshot);
+    }
+
     render() {
 
         console.log('[Persons.js] rendering...');

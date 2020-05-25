@@ -10,7 +10,7 @@ class App extends Component{
     constructor(props) {
 
         super(props);
-        console.log('[App.js] constructor');
+        console.log('[App.js - create] constructor');
 
         // If you want; you can define the `state` inside the constructor this way.
         // By the way; the definition of the `state` outside the `constructor()`
@@ -32,11 +32,11 @@ class App extends Component{
     * https://fb.me/react-unsafe-component-lifecycles
     **/
     // componentWillMount() {
-    //     console.log('[App.js] componentWillMount');
+    //     console.log('[App.js - create] componentWillMount');
     // }
 
     componentDidMount() {
-        console.log('[App.js] componentDidMount');
+        console.log('[App.js - create] componentDidMount');
     }
 
 
