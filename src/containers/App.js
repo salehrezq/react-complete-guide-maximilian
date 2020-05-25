@@ -39,6 +39,24 @@ class App extends Component{
         console.log('[App.js - create] componentDidMount');
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+
+        console.log('[App.js - update] shouldComponentUpdate');
+        // compare this.props with nextProps and return boolean based on it.
+        return true;
+    }
+
+    getSnapshotBeforeUpdate(prevProps, prevState) {
+
+        console.log('[App.js - update] getSnapshotBeforeUpdate');
+        return {snapshotData: 'This snapshot will be accessible in componentDidUpdate() through the third argument'};
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+
+        console.log('[App.js - update] componentDidUpdate');
+        console.log(snapshot);
+    }
 
 
     state = {
