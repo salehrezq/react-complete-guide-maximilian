@@ -16,12 +16,17 @@ const Cockpit = props => {
     // This isn’t handled as a special case — it follows
     // directly from how the dependencies array always works.
     useEffect(() => {
-        console.log('[Cockpit.js] useEffect');
+        console.log('[Cockpit.js] body useEffect');
         // Http request...
         setTimeout(() => {
             alert("Save data to cloud!");
         }, 1000);
-    }, [props.persons]);
+
+        // cleanup function:
+        return () => {
+            console.log('[Cockpit.js - cleanup] useEffect');
+        };
+    }, []);
 
     const classNames = [];
     if(props.persons.length <= 2){

@@ -4,11 +4,15 @@ import Person from './Person/Person';
 class Persons extends Component {
 
 
-    static getDerivedStateFromProps(props, state) {
-
-        console.log('[Persons.js] getDerivedStateFromProps', props);
-        return state;
-    }
+    // `Persons` uses `getDerivedStateFromProps` but its initial state is undefined.
+    // This is not recommended. Instead, define the initial state by assigning
+    // an object to `this.state` in the constructor of `Persons`.
+    // This ensures that `getDerivedStateFromProps` arguments have a consistent shape.
+    // static getDerivedStateFromProps(props, state) {
+    //
+    //     console.log('[Persons.js] getDerivedStateFromProps', props);
+    //     return state;
+    // }
 
     shouldComponentUpdate(nextProps, nextState) {
 
@@ -27,6 +31,12 @@ class Persons extends Component {
 
         console.log('[Persons.js - update] componentDidUpdate');
         console.log(snapshot);
+    }
+
+    // Invoked immediately before this component is unmounted and destroyed.
+    // Use this hook for cleanup work
+    componentWillUnmount = () => {
+        console.log('[Persons.js - cleanup] componentWillUnmount');
     }
 
     render() {
