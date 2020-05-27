@@ -26,13 +26,13 @@ const Cockpit = props => {
         return () => {
             console.log('[Cockpit.js - cleanup] useEffect');
         };
-    }, []);
+    });
 
     const classNames = [];
-    if(props.persons.length <= 2){
+    if(props.personsLength <= 2){
         classNames.push(classes.red);
     }
-    if(props.persons.length <= 1){
+    if(props.personsLength <= 1){
         classNames.push(classes.bold);
     }
 
@@ -57,4 +57,4 @@ const Cockpit = props => {
     );
 }
 
-export default Cockpit;
+export default React.memo(Cockpit);
