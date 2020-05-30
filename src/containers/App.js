@@ -68,6 +68,7 @@ class App extends Component{
             {id: 'p102', name: 'Ramy', age: 28},
             {id: 'p103', name: 'Shrod', age: 25}
         ],
+        changeCounter: 0,
         showPersons: false,
         showCockpit: true
     }
@@ -90,7 +91,19 @@ class App extends Component{
         // Update the person
         persons[personIndex] = person;
 
-        this.setState({persons: persons});
+        // The wrong way to update changeCounter based on an old/previous state
+        // this.setState({
+        //     persons: persons,
+        //     changeCounter: this.state.changeCounter + 1
+        // });
+
+        // The correct way to update changeCounter based on an old/previous state
+        this.setState((prevState, props) => {
+            return {
+                persons: persons,
+                changeCounter: prevState.changeCounter + 1
+            };
+        });
     }
 
     deletePersonHandler = personIndex => {
