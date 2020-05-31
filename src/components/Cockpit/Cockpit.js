@@ -1,9 +1,10 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 import classes from './Cockpit.module.css';
 
 
 const Cockpit = props => {
 
+    const btnToggleRef = useRef(null);
 
     // The default behavior for useEffect() is to fire the effect after every completed render.
     // Second argument of useEffect() is an array of the props you want the effect to depend on.
@@ -28,6 +29,19 @@ const Cockpit = props => {
         };
     });
 
+    useEffect(() => {
+
+        /**
+         * We access `btnToggleRef` inside `useEffect({},[])`
+         * because it is equivalent to `ComponentDidMount()` in class based components.
+         * That means it runs after rendering the component, that is after executing the `return(JSX)` function
+         * So that `btnToggleRef.current.click();` is called after setting the reference `ref={btnToggleRef}` inside `return(JSX)`
+         *
+         * That is; you cannot execute `btnToggleRef.current.click();` before setting `btnToggleRef` to reference some element.
+         */
+        btnToggleRef.current.click();
+    },[]);
+
     const classNames = [];
     if(props.personsLength <= 2){
         classNames.push(classes.red);
@@ -49,6 +63,7 @@ const Cockpit = props => {
                         to re-render certain things in your app too often; causes performance issues.
                         arrow function approach is not the recommended approach */}
           <button
+              ref={btnToggleRef}
               onClick={props.togglePersonsHandler}
               className={btnClass}>
               {props.showPersons? "Hide": "Show"}
