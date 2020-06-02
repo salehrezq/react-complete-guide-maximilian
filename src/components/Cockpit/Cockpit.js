@@ -68,6 +68,7 @@ const Cockpit = props => {
               className={btnClass}>
               {props.showPersons? "Hide": "Show"}
           </button>
+          <button onClick={props.login}>Log in</button>
       </div>
     );
 }

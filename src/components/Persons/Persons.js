@@ -18,7 +18,8 @@ class Persons extends Component {
 
         console.log('[Persons.js - update] shouldComponentUpdate');
         // compare this.props with nextProps and return boolean based on it.
-        return (nextProps.persons !== this.props.persons);
+        return ((nextProps.persons !== this.props.persons) ||
+            (nextProps.isAuthenticated !== this.props.isAuthenticated));
     }
 
     getSnapshotBeforeUpdate(prevProps, prevState) {
@@ -47,7 +48,9 @@ class Persons extends Component {
                             age={person.age}
                             click={() => this.props.deleteOnClick(index)}
                             key={person.id}
-                            changed={event => this.props.nameChanged(event, person.id)}/>
+                            changed={event => this.props.nameChanged(event, person.id)}
+                            isAuth={this.props.isAuthenticated}
+            />
         }));
     }
 }
