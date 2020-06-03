@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useContext} from 'react';
 import classes from './Cockpit.module.css';
 import AuthContext from '../../context/auth-context';
 
@@ -6,6 +6,8 @@ import AuthContext from '../../context/auth-context';
 const Cockpit = props => {
 
     const btnToggleRef = useRef(null);
+    // Can be named anything not restricted to `authContext`
+    const authContext = useContext(AuthContext);
 
     // The default behavior for useEffect() is to fire the effect after every completed render.
     // Second argument of useEffect() is an array of the props you want the effect to depend on.
@@ -69,10 +71,7 @@ const Cockpit = props => {
               className={btnClass}>
               {props.showPersons? "Hide": "Show"}
           </button>
-          <AuthContext.Consumer>
-              {(context) => <button onClick={context.login}>Log in</button>}
-          </AuthContext.Consumer>
-
+              <button onClick={authContext.login}>Log in</button>
       </div>
     );
 }
