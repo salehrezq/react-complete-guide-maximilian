@@ -6,6 +6,7 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 import withClass from '../hoc/withClass';
 import Auxiliary from "../hoc/Auxiliary";
+import AuthContext from '../context/auth-context';
 
 class App extends Component{
 
@@ -140,7 +141,6 @@ class App extends Component{
             persons = <Persons persons={this.state.persons}
                                deleteOnClick={this.deletePersonHandler}
                                nameChanged={this.nameChangeHandler}
-                               isAuthenticated={this.state.authenticated}
             />
         }
 
@@ -150,16 +150,27 @@ class App extends Component{
                         onClick={() => {this.setState({showCockpit: !this.state.showCockpit})}}>
                         {this.state.showCockpit? "Hide": "Show"}
                     </button>
-                    {this.state.showCockpit?
-                    <Cockpit
-                        title={this.props.appTitle}
-                        personsLength={this.state.persons.length}
-                        showPersons={this.state.showPersons}
-                        togglePersonsHandler={this.togglePersonsHandler}
-                        login={this.loginHandler}
-                    />: null
-                    }
-                    {persons}
+                    {/* You wrap inside AuthContext.Provider the relevant elements that need to consume its context.
+                        Note that `Cockpit` can be skipped from `AuthContext.Provider`
+                        and still use its props as usual to pass `login={this.loginHandler}` */}
+                    <AuthContext.Provider value={{
+                        authenticated: this.state.authenticated,
+                        login: this.loginHandler
+                    }}>
+                        {this.state.showCockpit?
+                        <Cockpit
+                            title={this.props.appTitle}
+                            personsLength={this.state.persons.length}
+                            showPersons={this.state.showPersons}
+                            togglePersonsHandler={this.togglePersonsHandler}
+                        />: null
+                        }
+                        {/* Here `Persons` itself does not need to consume the context,
+                        But `Person` need to consume the context,
+                        and because `Persons` itself includes `Person` components
+                        we need to wrap `Persons` inside `AuthContext.Provider` for that purpose */}
+                        {persons}
+                    </AuthContext.Provider>
                 </Auxiliary>
         );
     }

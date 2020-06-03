@@ -49,7 +49,6 @@ class Persons extends Component {
                             click={() => this.props.deleteOnClick(index)}
                             key={person.id}
                             changed={event => this.props.nameChanged(event, person.id)}
-                            isAuth={this.props.isAuthenticated}
             />
         }));
     }
